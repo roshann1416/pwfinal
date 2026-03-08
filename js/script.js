@@ -180,3 +180,121 @@ function generateTimeSlots() {
         const period = hour >= 12 ? 'PM' : 'AM';
         const displayHour = hour > 12 ? hour - 12 : hour;
         const timeString = `${displayHour}:00 ${period
+
+                                                /* ==================== 
+   1. STATE VARIABLES 
+   ==================== */
+let selectedService = "Salon & Spa";
+let selectedDate = null;
+let selectedTime = null;
+
+/* ==================== 
+   2. CONFIGURATION 
+   ==================== */
+const START_HOUR = 9;
+const END_HOUR = 20;
+
+/* ==================== 
+   3. DOM ELEMENTS 
+   ==================== */
+const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+const dateInput = document.getElementById('booking-date');
+const form = document.getElementById('bookingForm');
+const confirmationSection = document.getElementById('confirmationSection');
+const bookingFormContainer = document.querySelector('.booking-form-container');
+
+// Dashboard Elements
+const bookingsContainer = document.getElementById('bookings-container');
+const totalBookingsEl = document.getElementById('total-bookings');
+const upcomingBookingsEl = document.getElementById('upcoming-bookings');
+const completedBookingsEl = document.getElementById('completed-bookings');
+
+/* ==================== 
+   4. GENERATE TIME SLOTS 
+   ==================== */
+function generateTimeSlots() {
+    if (!timeSlotsContainer) return;
+    timeSlotsContainer.innerHTML = '';
+
+    for (let hour = START_HOUR; hour <= END_HOUR; hour++) {
+        const period = hour >= 12 ? 'PM' : 'AM';
+        const displayHour = hour > 12 ? hour - 12 : hour;
+        const timeString = `${displayHour}:00 ${period}`;
+
+        const label = document.createElement('label');
+        label.className = 'time-slot';
+        
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'time';
+        input.value = timeString;
+        input.id = `slot-${hour}`;
+
+        const span = document.createElement('span');
+        span.textContent = timeString;
+
+        label.appendChild(input);
+        label.appendChild(span);
+        timeSlotsContainer.appendChild(label);
+
+        label.addEventListener('click', () => selectTimeSlot(input, timeString));
+    }
+}
+
+/* ==================== 
+   5. HANDLE SLOT SELECTION 
+   ==================== */
+function selectTimeSlot(radioInput, timeValue) {
+    selectedTime = timeValue;
+    const allSlots = document.querySelectorAll('.time-slot');
+    allSlots.forEach(slot => slot.classList.remove('active'));
+    radioInput.parentElement.classList.add('active');
+    console.log(`Time Selected: ${selectedTime}`);
+}
+
+/* ==================== 
+   6. HANDLE DATE CHANGE 
+   ==================== */
+if (dateInput) {
+    dateInput.addEventListener('change', (e) => {
+        selectedDate = e.target.value;
+        console.log(`Date Selected: ${selectedDate}`);
+    });
+}
+
+/* ==================== 
+   7. LOCAL STORAGE FUNCTIONS 
+   ==================== */
+function getBookings() {
+    const bookings = localStorage.getItem('availBookings');
+    return bookings ? JSON.parse(bookings) : [];
+}
+
+function saveBooking(booking) {
+    const bookings = getBookings();
+    bookings.push(booking);
+    localStorage.setItem('availBookings', JSON.stringify(bookings));
+}
+
+function deleteBooking(index) {
+    const bookings = getBookings();
+    bookings.splice(index, 1);
+    localStorage.setItem('availBookings', JSON.stringify(bookings));
+    renderDashboard(); // Refresh dashboard
+}
+
+/* ==================== 
+   8. FORM SUBMISSION 
+   ==================== */
+if (form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        if (!selectedDate || !selectedTime) {
+            alert('Please select both a date and a time slot.');
+            return;
+        }
+
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
