@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - AvailBook</title>
+    
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Link to FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Specific styles for this page (Optional, but good for date picker customization) -->
+    <style>
+        /* Quick override for date input styling to match theme */
+        input[type="date"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="date"]:focus {
+            border-color: #16a34a;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-calendar-check"></i> AvailBook
+            </a>
+
+            <nav class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Login</a>
+                <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+
+            <div class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= BREADCRUMB ================= -->
+    <div class="container" style="padding: 20px 0;">
+        <nav aria-label="breadcrumb">
+            <ol style="display: flex; gap: 10px; font-size: 0.9rem; color: #6b7280;">
+                <li><a href="index.html" style="color: #16a34a;">Home</a></li>
+                <li><i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i></li>
+                <li><a href="index.html#services" style="color: #6b7280;">Services</a></li>
+                <li><i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i></li>
+                <li style="color: #1f2937; font-weight: 600;">Salon & Spa</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- ================= BOOKING SECTION ================= -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-layout">
+                
+                <!-- Left Column: Service Details -->
+                <div class="booking-details">
+                    <div class="service-header">
+                        <span class="category-tag">Beauty & Wellness</span>
+                        <h1>Salon & Spa Services</h1>
+                        <p class="description">
+                            Experience relaxation and rejuvenation. Book your appointment for haircuts, coloring, facials, massages, and more. 
+                            Our expert stylists are ready to serve you.
+                        </p>
+                    </div>
+
+                    <div class="service-info-grid">
+                        <div class="info-item">
+                            <i class="fa-solid fa-clock"></i>
+                            <div>
+                                <strong>Working Hours</strong>
+                                <p>Mon - Sat: 9:00 AM - 8:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <div>
+                                <strong>Location</strong>
+                                <p>Downtown City Center, Block A</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i class="fa-solid fa-star"></i>
+                            <div>
+                                <strong>Rating</strong>
+                                <p>4.8/5 (1,200+ Reviews)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Image Placeholder -->
+                    <div class="service-image-container">
+                        <img src="https://via.placeholder.com/800x400?text=Salon+Interior" alt="Salon Interior">
+                    </div>
+                </div>
+
+                <!-- Right Column: Booking Form -->
+                <div class="booking-form-container">
+                    <div class="form-card">
+                        <h2>Book Appointment</h2>
+                        <p style="margin-bottom: 20px; color: #6b7280; font-size: 0.9rem;">Please select a date and time to proceed.</p>
+                        
+                        <form action="#" method="POST">
+                            
+                            <!-- Date Picker -->
+                            <div class="form-group">
+                                <label for="booking-date">Select Date</label>
+                                <input type="date" id="booking-date" name="date" required>
+                            </div>
+
+                            <!-- Time Slots -->
+                            <div class="form-group">
+                                <label>Select Time Slot</label>
+                                <div class="time-slots-grid">
+                                    <label class="time-slot">
+                                        <input type="radio" name="time" value="09:00 AM">
+                                        <span>09:00 AM</span>
+                                    </label>
+                                    <label class="time-slot">
+                                        <input type="radio" name="time" value="10:00 AM">
+                                        <span>10:00 AM</span>
+                                    </label>
+                                    <label class="time-slot">
+                                        <input type="radio" name="time" value="11:00 AM">
+                                        <span>11:00 AM</span>
+                                    </label>
+                                    <label class="time-slot">
+                                        <input type="radio" name="time" value="01:00 PM">
+                                        <span>01:00 PM</span>
+                                    </label>
+                                    <label class="time-slot">
+                                        <input type="radio" name="time" value="02:00 PM">
+                                        <span>02:00 PM</span>
+                                    </label>
+                                    <label class="time-slot">
+                                        <input type="radio" name="time" value="03:00 PM">
+                                        <span>03:00 PM</span>
+                                    </label>
+                                    <label class="time-slot">
+                                        <input type="radio" name="time" value="04:00 PM">
+                                        <span>04:00 PM</span>
+                                    </label>
+                                    <label class="time-slot">
+                                        <input type="radio" name="time" value="05:00 PM">
+                                        <span>05:00 PM</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- User Details -->
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" placeholder="John Doe" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" placeholder="+1 234 567 890" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="john@example.com" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 10px;">
+                                Confirm Booking <i class="fa-solid fa-check"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>AvailBook</h3>
+                <p>Making appointments simple, secure, and accessible for everyone.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fa-solid fa-envelope"></i> support@availbook.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 234 567 890</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 AvailBook. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Link to JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
