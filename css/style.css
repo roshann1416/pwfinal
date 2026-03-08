@@ -1105,3 +1105,179 @@ img {
         flex-direction: column;
     }
 }
+/* ... (Keep all previous CSS) ... */
+
+/* ==================== 
+   CHECK-IN BUTTON STYLES 
+   ==================== */
+.btn-checkin {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-checkin:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(22, 163, 74, 0.3);
+}
+
+.btn-checkin:disabled {
+    background-color: #d1d5db;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ==================== 
+   CHECKED IN CARD STYLE 
+   ==================== */
+.booking-card.checked-in {
+    border: 2px solid var(--primary-color);
+    background-color: #f0fdf4; /* Very light green */
+}
+
+/* ==================== 
+   RESPONSIVE 
+   ==================== */
+@media (max-width: 768px) {
+    .booking-actions {
+        flex-direction: column;
+    }
+    
+    .btn-checkin, .btn-cancel {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+   /* ... (Keep all previous CSS) ... */
+
+/* ==================== 
+   SEARCH & FILTER STYLES 
+   ==================== */
+.search-filter-container {
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: var(--shadow-sm);
+}
+
+.search-box input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.filter-btn {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+/* Hide cards when filtering */
+.service-card.hidden {
+    display: none;
+}
+
+/* Empty State for Search */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.no-results i {
+    font-size: 3rem;
+    color: #d1d5db;
+    margin-bottom: 15px;
+}
+
+.no-results h3 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.no-results p {
+    color: var(--text-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-filter-container {
+        gap: 15px;
+    }
+    
+    .filter-buttons {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    
+    .filter-btn {
+        white-space: nowrap;
+    }
+}
+}
