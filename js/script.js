@@ -296,5 +296,257 @@ if (form) {
         }
 
         const name = document.getElementById('name').value;
+        /* ==================== 
+   1. STATE VARIABLES 
+   ==================== */
+let selectedService = "Salon & Spa";
+let selectedDate = null;
+let selectedTime = null;
+
+/* ==================== 
+   2. CONFIGURATION 
+   ==================== */
+const START_HOUR = 9;
+const END_HOUR = 20;
+
+/* ==================== 
+   3. DOM ELEMENTS 
+   ==================== */
+const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+const dateInput = document.getElementById('booking-date');
+const form = document.getElementById('bookingForm');
+const confirmationSection = document.getElementById('confirmationSection');
+const bookingFormContainer = document.querySelector('.booking-form-container');
+
+// Dashboard Elements
+const bookingsContainer = document.getElementById('bookings-container');
+const totalBookingsEl = document.getElementById('total-bookings');
+const upcomingBookingsEl = document.getElementById('upcoming-bookings');
+const completedBookingsEl = document.getElementById('completed-bookings');
+
+/* ==================== 
+   4. GENERATE TIME SLOTS 
+   ==================== */
+function generateTimeSlots() {
+    if (!timeSlotsContainer) return;
+    timeSlotsContainer.innerHTML = '';
+
+    for (let hour = START_HOUR; hour <= END_HOUR; hour++) {
+        const period = hour >= 12 ? 'PM' : 'AM';
+        const displayHour = hour > 12 ? hour - 12 : hour;
+        const timeString = `${displayHour}:00 ${period}`;
+
+        const label = document.createElement('label');
+        label.className = 'time-slot';
+        
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'time';
+        input.value = timeString;
+        input.id = `slot-${hour}`;
+
+        const span = document.createElement('span');
+        span.textContent = timeString;
+
+        label.appendChild(input);
+        label.appendChild(span);
+        timeSlotsContainer.appendChild(label);
+
+        label.addEventListener('click', () => selectTimeSlot(input, timeString));
+    }
+}
+
+/* ==================== 
+   5. HANDLE SLOT SELECTION 
+   ==================== */
+function selectTimeSlot(radioInput, timeValue) {
+    selectedTime = timeValue;
+    const allSlots = document.querySelectorAll('.time-slot');
+    allSlots.forEach(slot => slot.classList.remove('active'));
+    radioInput.parentElement.classList.add('active');
+    console.log(`Time Selected: ${selectedTime}`);
+}
+
+/* ==================== 
+   6. HANDLE DATE CHANGE 
+   ==================== */
+if (dateInput) {
+    dateInput.addEventListener('change', (e) => {
+        selectedDate = e.target.value;
+        console.log(`Date Selected: ${selectedDate}`);
+    });
+}
+
+/* ==================== 
+   7. LOCAL STORAGE FUNCTIONS 
+   ==================== */
+function getBookings() {
+    const bookings = localStorage.getItem('availBookings');
+    return bookings ? JSON.parse(bookings) : [];
+}
+
+function saveBooking(booking) {
+    const bookings = getBookings();
+    bookings.push(booking);
+    localStorage.setItem('availBookings', JSON.stringify(bookings));
+}
+
+function deleteBooking(index) {
+    const bookings = getBookings();
+    bookings.splice(index, 1);
+    localStorage.setItem('availBookings', JSON.stringify(bookings));
+    renderDashboard(); // Refresh dashboard
+}
+
+/* ==================== 
+   8. CHECK-IN FUNCTIONALITY 
+   ==================== */
+function checkInBooking(index) {
+    const bookings = getBookings();
+    
+    // Check if booking exists
+    if (bookings[index]) {
+        // Update status to "Checked In"
+        bookings[index].status = "Checked In";
+        
+        // Save back to localStorage
+        localStorage.setItem('availBookings', JSON.stringify(bookings));
+        
+        // Re-render the dashboard to show the update
+        renderDashboard();
+        
+        // Optional: Show a success message
+        alert("You have successfully checked in!");
+    }
+}
+
+/* ==================== 
+   9. RENDER DASHBOARD 
+   ==================== */
+function renderDashboard() {
+    const bookings = getBookings();
+    
+    // Update Stats
+    totalBookingsEl.textContent = bookings.length;
+    upcomingBookingsEl.textContent = bookings.filter(b => b.status === "Upcoming").length;
+    completedBookingsEl.textContent = bookings.filter(b => b.status === "Checked In" || b.status === "Completed").length;
+
+    // Clear current list
+    bookingsContainer.innerHTML = '';
+
+    if (bookings.length === 0) {
+        bookingsContainer.innerHTML = `
+            <div class="empty-state">
+                <i class="fa-solid fa-calendar-xmark"></i>
+                <h3>No Bookings Found</h3>
+                <p>You haven't booked any services yet.</p>
+                <a href="index.html#services" class="btn btn-primary">Book Now</a>
+            </div>
+        `;
+        return;
+    }
+
+    // Generate Cards
+    bookings.forEach((booking, index) => {
+        const card = document.createElement('div');
+        card.className = 'booking-card';
+        
+        // Determine status badge class
+        let statusClass = 'status-upcoming';
+        if (booking.status === 'Checked In') statusClass = 'status-completed';
+        if (booking.status === 'Cancelled') statusClass = 'status-cancelled';
+
+        card.innerHTML = `
+            <div class="booking-header">
+                <div>
+                    <div class="booking-service">${booking.service}</div>
+                    <span class="booking-date"><i class="fa-regular fa-calendar"></i> ${booking.date}</span>
+                </div>
+                <span class="status-badge ${statusClass}">${booking.status}</span>
+            </div>
+            
+            <div class="booking-time">
+                <i class="fa-regular fa-clock"></i>
+                <span>${booking.time}</span>
+            </div>
+
+            <div class="booking-actions">
+                ${booking.status !== 'Checked In' && booking.status !== 'Cancelled' 
+                    ? `<button class="btn-checkin" onclick="checkInBooking(${index})">Check In</button>` 
+                    : ''}
+                <button class="btn-cancel" onclick="deleteBooking(${index})">Cancel</button>
+            </div>
+        `;
+        
+        bookingsContainer.appendChild(card);
+    });
+}
+
+/* ==================== 
+   10. FORM SUBMISSION 
+   ==================== */
+if (form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        if (!selectedDate || !selectedTime) {
+            alert('Please select both a date and a time slot.');
+            return;
+        }
+
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+
+        const bookingData = {
+            service: selectedService,
+            date: selectedDate,
+            time: selectedTime,
+            customer: {
+                name: name,
+                phone: phone,
+                email: email
+            },
+            status: "Upcoming" // Default status
+        };
+
+        saveBooking(bookingData);
+        
+        // Show Confirmation
+        document.getElementById('conf-service').textContent = bookingData.service;
+        document.getElementById('conf-date').textContent = bookingData.date;
+        document.getElementById('conf-time').textContent = bookingData.time;
+        document.getElementById('conf-name').textContent = bookingData.customer.name;
+
+        bookingFormContainer.style.display = 'none';
+        confirmationSection.classList.remove('hidden');
+        
+        // Reset form
+        form.reset();
+        selectedDate = null;
+        selectedTime = null;
+        document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('active'));
+    });
+}
+
+/* ==================== 
+   11. VIEW SAVED BOOKINGS 
+   ==================== */
+function viewSavedBookings() {
+    window.location.href = 'dashboard.html';
+}
+
+/* ==================== 
+   12. INITIALIZE 
+   ==================== */
+document.addEventListener('DOMContentLoaded', () => {
+    // Generate time slots on booking page
+    generateTimeSlots();
+    
+    // Render dashboard on dashboard page
+    if (bookingsContainer) {
+        renderDashboard();
+    }
+});
         const phone = document.getElementById('phone').value;
         const email = document.getElementById('email').value;
