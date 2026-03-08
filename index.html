@@ -234,6 +234,96 @@
 
     <!-- Link to JS (To be created) -->
     <script src="js/script.js"></script>
+    /* ==================== 
+   13. SEARCH & FILTER LOGIC 
+   ==================== */
+document.addEventListener('DOMContentLoaded', () => {
+    // Generate time slots on booking page
+    generateTimeSlots();
+    
+    // Render dashboard on dashboard page
+    if (bookingsContainer) {
+        renderDashboard();
+    }
+
+    // Initialize Search and Filter on Homepage
+    initSearchAndFilter();
+});
+
+function initSearchAndFilter() {
+    const searchInput = document.getElementById('searchInput');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const serviceCards = document.querySelectorAll('.service-card');
+    const servicesGrid = document.querySelector('.services-grid');
+
+    // Handle Search Input
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            filterCards(searchTerm, 'all');
+        });
+    }
+
+    // Handle Filter Buttons
+    if (filterBtns.length > 0) {
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                const category = btn.getAttribute('data-category');
+                const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+                
+                filterCards(searchTerm, category);
+            });
+        });
+    }
+
+    // Main Filter Function
+    function filterCards(searchTerm, category) {
+        let visibleCount = 0;
+
+        serviceCards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const description = card.querySelector('p').textContent.toLowerCase();
+            const cardCategory = card.getAttribute('data-category');
+
+            // Check if title or description matches search term
+            const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+            
+            // Check if category matches (or if 'all' is selected)
+            const matchesCategory = category === 'all' || cardCategory === category;
+
+            if (matchesSearch && matchesCategory) {
+                card.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        // Handle No Results
+        if (visibleCount === 0) {
+            if (!servicesGrid.querySelector('.no-results')) {
+                const noResults = document.createElement('div');
+                noResults.className = 'no-results';
+                noResults.innerHTML = `
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <h3>No Services Found</h3>
+                    <p>Try adjusting your search or filter criteria.</p>
+                `;
+                servicesGrid.appendChild(noResults);
+            }
+        } else {
+            const noResults = servicesGrid.querySelector('.no-results');
+            if (noResults) {
+                noResults.remove();
+            }
+        }
+    }
+}
 </body>
 </html>
 ```
