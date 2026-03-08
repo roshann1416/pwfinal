@@ -147,3 +147,36 @@ if (form) {
 document.addEventListener('DOMContentLoaded', () => {
     generateTimeSlots();
 });
+/* ==================== 
+   1. STATE VARIABLES 
+   ==================== */
+let selectedService = "Salon & Spa";
+let selectedDate = null;
+let selectedTime = null;
+
+/* ==================== 
+   2. CONFIGURATION 
+   ==================== */
+const START_HOUR = 9;
+const END_HOUR = 20;
+const TIME_STEP = 1;
+
+/* ==================== 
+   3. DOM ELEMENTS 
+   ==================== */
+const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+const dateInput = document.getElementById('booking-date');
+const form = document.getElementById('bookingForm');
+const confirmationSection = document.getElementById('confirmationSection');
+const bookingFormContainer = document.querySelector('.booking-form-container');
+
+/* ==================== 
+   4. GENERATE TIME SLOTS 
+   ==================== */
+function generateTimeSlots() {
+    timeSlotsContainer.innerHTML = '';
+
+    for (let hour = START_HOUR; hour <= END_HOUR; hour++) {
+        const period = hour >= 12 ? 'PM' : 'AM';
+        const displayHour = hour > 12 ? hour - 12 : hour;
+        const timeString = `${displayHour}:00 ${period
