@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AvailBook - The easiest way to book appointments for any service.">
+    <title>AvailBook | Book Your Appointment</title>
+    
+    <!-- Link to CSS (To be created) -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Link to FontAwesome for Icons (Modern UI requirement) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Poppins for a modern, clean look) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <!-- Logo Section -->
+            <a href="#" class="logo">
+                <i class="fa-solid fa-calendar-check"></i> AvailBook
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="nav-links">
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Auth Buttons -->
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Login</a>
+                <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+
+            <!-- Mobile Menu Toggle (Hidden on Desktop) -->
+            <div class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section id="hero" class="hero-section">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Book Your Services <br> <span class="highlight">In Just a Click</span></h1>
+                <p>From salons to doctors, book appointments for your favorite services easily. Fast, secure, and reliable.</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary btn-lg">Book Now</a>
+                    <a href="#" class="btn btn-secondary btn-lg">Learn More</a>
+                </div>
+            </div>
+            <!-- Hero Image Placeholder -->
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/500x400?text=AvailBook+Illustration" alt="Booking Illustration">
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SERVICES SECTION ================= -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Choose from a wide variety of categories to book your appointment.</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="services-grid">
+                
+                <!-- Card 1: Salon -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-scissors"></i>
+                    </div>
+                    <h3>Salon & Spa</h3>
+                    <p>Book haircuts, facials, and spa treatments.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 2: Movie Theater -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-ticket"></i>
+                    </div>
+                    <h3>Movie Theater</h3>
+                    <p>Reserve your seats for the latest blockbusters.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 3: Restaurant -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-utensils"></i>
+                    </div>
+                    <h3>Restaurant</h3>
+                    <p>Book a table for a delicious dining experience.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 4: Dentist -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-tooth"></i>
+                    </div>
+                    <h3>Dentist</h3>
+                    <p>Schedule checkups and dental procedures.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 5: Doctor Clinic -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <h3>Doctor Clinic</h3>
+                    <p>Consult with top specialists online or offline.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 6: Gym Trainer -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <h3>Gym Trainer</h3>
+                    <p>Book personal training sessions.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 7: Car Service -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-car"></i>
+                    </div>
+                    <h3>Car Service</h3>
+                    <p>Schedule maintenance and repairs.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 8: Photography -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <h3>Photography</h3>
+                    <p>Book photoshoots for events and portraits.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 9: Tutoring -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <h3>Tutoring Center</h3>
+                    <p>Find tutors for any subject.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 10: Event Hall -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-people-roof"></i>
+                    </div>
+                    <h3>Event Hall</h3>
+                    <p>Reserve venues for weddings and parties.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 11: Travel Agency -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-plane-departure"></i>
+                    </div>
+                    <h3>Travel Agency</h3>
+                    <p>Plan your next vacation with us.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <!-- Card 12: Pet Grooming -->
+                <article class="service-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-paw"></i>
+                    </div>
+                    <h3>Pet Grooming</h3>
+                    <p>Care for your furry friends.</p>
+                    <a href="#" class="card-link">Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>AvailBook</h3>
+                <p>Making appointments simple, secure, and accessible for everyone.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p><i class="fa-solid fa-envelope"></i> support@availbook.com</p>
+                <p><i class="fa-solid fa-phone"></i> +1 234 567 890</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 AvailBook. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Link to JS (To be created) -->
+    <script src="js/script.js"></script>
+</body>
+</html>
+```
